@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,20 +18,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dog {
-    
+public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String breed;
-    private String fur_color;
-    private int age;
+    private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 
-    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
-    private List<Appointment> appointment;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Appointment> appointments;
 }

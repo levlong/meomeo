@@ -29,7 +29,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DogController {
 
-    // Get one dog.
     private final DogRepository repository;
     private final DogAssembler assembler;
 
